@@ -4,4 +4,5 @@ export type InitializeSessionArgs = {
   applicationIdentifier: string;
   subscriber: Subscriber;
   subscriberHash?: string;
+  jwt?: string;
 };

@@ -36,12 +36,17 @@ export class Novu implements Pick<NovuEventEmitter, 'on'> {
       apiUrl: options.apiUrl || options.backendUrl,
       userAgent: options.__userAgent,
     });
+    if (options.jwt) {
+      // If JWT is provided, set it as the authorization token immediately
+      this.#inboxService.setAuthorizationToken(options.jwt);
+    }
     this.#emitter = new NovuEventEmitter();
     this.#session = new Session(
       {
         applicationIdentifier: options.applicationIdentifier,
         subscriberHash: options.subscriberHash,
         subscriber: buildSubscriber(options),
+        jwt: options.jwt, // pass jwt to session if you want to handle skipping init
       },
       this.#inboxService,
       this.#emitter

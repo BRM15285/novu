@@ -26,6 +26,10 @@ export class Session {
   }
 
   public async initialize(): Promise<void> {
+    if (this.#options.jwt) {
+      return;
+    }
+
     try {
       const { applicationIdentifier, subscriberHash, subscriber } = this.#options;
       this.#emitter.emit('session.initialize.pending', { args: this.#options });

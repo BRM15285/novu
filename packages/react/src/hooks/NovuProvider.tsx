@@ -23,6 +23,7 @@ export const NovuProvider = ({
   socketUrl,
   useCache,
   subscriber,
+  jwt,
 }: NovuProviderProps) => {
   return (
     <InternalNovuProvider
@@ -34,6 +35,7 @@ export const NovuProvider = ({
       useCache={useCache}
       userAgentType="hooks"
       subscriber={buildSubscriber(subscriberId, subscriber)}
+      jwt={jwt}
     >
       {children}
     </InternalNovuProvider>
@@ -56,6 +58,7 @@ export const InternalNovuProvider = ({
   useCache,
   subscriber,
   userAgentType,
+  jwt,
 }: NovuProviderProps & { userAgentType: 'components' | 'hooks' }) => {
   const novu = useMemo(
     () =>
@@ -66,6 +69,7 @@ export const InternalNovuProvider = ({
         apiUrl,
         socketUrl,
         useCache,
+        jwt,
         __userAgent: `${baseUserAgent} ${userAgentType}`,
         ...(subscriber ? { subscriber } : { subscriberId: subscriberId as string }),
       }),
@@ -79,6 +83,7 @@ export const InternalNovuProvider = ({
       useCache,
       subscriber,
       userAgentType,
+      jwt,
     ]
   );
 

@@ -179,6 +179,7 @@ export type NovuOptions = {
   __userAgent?: string;
   applicationIdentifier: string;
   subscriberHash?: string;
+  jwt?: string;
   apiUrl?: string;
   socketUrl?: string;
   useCache?: boolean;

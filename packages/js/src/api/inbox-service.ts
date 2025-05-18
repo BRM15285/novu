@@ -18,6 +18,10 @@ export class InboxService {
   isSessionInitialized = false;
   #httpClient: HttpClient;
 
+  public setAuthorizationToken(token: string) {
+    this.#httpClient.setAuthorizationToken(token);
+  }
+
   constructor(options: InboxServiceOptions = {}) {
     this.#httpClient = new HttpClient(options);
   }
