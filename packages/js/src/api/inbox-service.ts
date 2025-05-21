@@ -19,7 +19,7 @@ export class InboxService {
   #httpClient: HttpClient;
 
   public setAuthorizationToken(token: string) {
-    this.#httpClient.setAuthorizationToken(token);
+    this.#httpClient.setAuthorizationToken(token, false);
   }
 
   constructor(options: InboxServiceOptions = {}) {

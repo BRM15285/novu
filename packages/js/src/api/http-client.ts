@@ -28,8 +28,8 @@ export class HttpClient {
     };
   }
 
-  setAuthorizationToken(token: string) {
-    this.headers.Authorization = `Bearer ${token}`;
+  setAuthorizationToken(token: string, useBearer = true) {
+    this.headers.Authorization = (useBearer ? 'Bearer ' : '') + token;
   }
 
   setHeaders(headers: Record<string, string>) {
