@@ -115,21 +115,16 @@ export class HttpClient {
 }
 
 function combineUrl(...args: string[]): string {
-  return (
-    args
-      .reduce<string[]>((acc, part) => {
-        if (part) {
-          /*
-           * 1. Replace multiple slashes with a single slash unless they are part of a protocol (http:, https:)
-           * 2. Remove leading and trailing slashes
-           */
-          acc.push(part.replace(/(?<!https?:)\/+/g, '/').replace(/^\/+|\/+$/g, ''));
-        }
+  return args
+    .reduce<string[]>((acc, part) => {
+      if (part) {
+        // No lookbehind: primero quitamos los slashes, luego los agregamos solo donde corresponde
+        const cleaned = part.replace(/^\/+|\/+$/g, ''); // quita slashes al inicio y final
+        acc.push(cleaned);
+      }
 
-        return acc;
-      }, [])
-      .join('/')
-      // For search params, replace /foo/?bar=42 with /foo?bar=42
-      .replace(/\/\?/, '?')
-  );
+      return acc;
+    }, [])
+    .join('/')
+    .replace(/\/\?/, '?');
 }
